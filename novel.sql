@@ -1,0 +1,30 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Purchase" (
+	"CustomerID"	INTEGER NOT NULL,
+	"BookID"	INTEGER NOT NULL,
+	"PurchaseDate"	INTEGER NOT NULL,
+	PRIMARY KEY("CustomerID","BookID","PurchaseDate"),
+	FOREIGN KEY("CustomerID") REFERENCES "Customer"("CustomerID"),
+	FOREIGN KEY("BookID") REFERENCES "Novel"("BookID")
+);
+CREATE TABLE IF NOT EXISTS "Customer" (
+	"CustomerID"	INTEGER NOT NULL,
+	"CustomerName"	VARCHAR(50) NOT NULL,
+	"CustomerDOB"	DATE NOT NULL,
+	PRIMARY KEY("CustomerID")
+);
+CREATE TABLE IF NOT EXISTS "Novel" (
+	"BookID"	INTEGER NOT NULL,
+	"Title"	VARCHAR(50) NOT NULL,
+	"NovelPD"	DATE NOT NULL,
+	"AuthorID"	INTEGER NOT NULL,
+	PRIMARY KEY("BookID"),
+	FOREIGN KEY("AuthorID") REFERENCES "Author"("AuthorID")
+);
+CREATE TABLE IF NOT EXISTS "Author" (
+	"AuthorID"	INTEGER NOT NULL,
+	"AuthorDOB"	DATE NOT NULL,
+	"AuthorName"	VARCHAR(50) NOT NULL,
+	PRIMARY KEY("AuthorID")
+);
+COMMIT;
